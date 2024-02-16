@@ -1,4 +1,4 @@
-Googlw console instance
+Google console instance
 
 cmd - 
 
