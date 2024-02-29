@@ -1,0 +1,73 @@
+
+.upload-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-container h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+.upload-container form {
+  margin-top: 20px;
+}
+
+.upload-container input[type="text"],
+.upload-container input[type="file"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.upload-container select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    appearance: none; /* Removes default arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><polygon points="0,0 10,0 5,5" fill="%23000"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    background-size: 10px 5px;
+  }
+  
+  .upload-container select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+.upload-container input[type="text"]:focus,
+.upload-container input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.upload-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-container button:hover {
+  background-color: #0056b3;
+}
+.upload-container .error-message {
+    color: #dc3545;
+    margin-top: 10px;
+    text-align: center;
+  }
