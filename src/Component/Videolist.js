@@ -60,10 +60,10 @@ function VideoList({handlePageChange, setAllFile, AllFile }) {
       </div>
       <div className="vedio" >
         
-        <video controls autoPlay>
+        <video controls width="40%" height="40%" >
           <source
-            src={"https://www.youtube.com/watch?v=iu-LBY7NXD4"}
-            type={VedioSource.type}
+            src={"blob:http://localhost:3000/1125b9bf-96ed-42d1-9af4-5d8d5e55041e"}
+            type={"video/mp4"}
           />
           Your browser does not support the video tag.
         </video>

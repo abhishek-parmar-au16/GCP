@@ -1,16 +1,24 @@
 // Upload.js
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Upload.css";
 import { v4 as uuidv4 } from "uuid";
-import UploadList from "./Videolist"
+import UploadList from "./Videolist";
 
-function Upload({handlePageChange ,setAllFile ,AllFile}) {
+function Upload({ handlePageChange, setAllFile, AllFile }) {
   const [videoName, setVideoName] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [typeVdo, settypeVdo] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [filled, setFilled] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (filled < 100 && isRunning) {
+      setTimeout(() => setFilled((prev) => (prev += 2)), 40);
+    }
+  }, [filled, isRunning]);
 
   const handleFileUpload = (e) => {
     console.log("ee", e);
@@ -19,6 +27,9 @@ function Upload({handlePageChange ,setAllFile ,AllFile}) {
       return;
     } else {
       setFile(e.target.files[0]);
+      console.log("URL ", URL.createObjectURL(e.target.files[0]));
+      setIsRunning(true);
+      //   URL.createObjectURL(event.target.files[0])
     }
   };
 
@@ -42,15 +53,16 @@ function Upload({handlePageChange ,setAllFile ,AllFile}) {
       setVideoName("");
       setFile(null);
       settypeVdo("");
+      setFilled(0);
     }
   };
 
-  const HandleNext =()=>{
-    handlePageChange("list")
-  }
-  const handleBack=()=>{
-    handlePageChange("login")
-  }
+  const HandleNext = () => {
+    handlePageChange("list");
+  };
+  const handleBack = () => {
+    handlePageChange("login");
+  };
   return (
     <div className="upload-container">
       <h2>Upload Video</h2>
@@ -89,12 +101,29 @@ function Upload({handlePageChange ,setAllFile ,AllFile}) {
             onChange={(e) => handleFileUpload(e)}
           />
         </div>
+        {file && (
+          <div className="progressbar">
+            <div
+              style={{
+                height: "100%",
+                width: `${filled}%`,
+                backgroundColor: "rgb(0 255 74)",
+                transition: "width 0.5s",
+              }}
+            ></div>
+            <span className="progressPercent">{filled}%</span>
+          </div>
+        )}
         <button type="button" onClick={handleUpload}>
           Upload
         </button>
       </form>
-      <div style={{display:"flex" ,marginTop:"13px"}}>
-        <button type="button" onClick={handleBack} style={{marginRight:"5px"}}>
+      <div style={{ display: "flex", marginTop: "13px" }}>
+        <button
+          type="button"
+          onClick={handleBack}
+          style={{ marginRight: "5px" }}
+        >
           Back
         </button>
         <button type="button" onClick={HandleNext}>
@@ -102,14 +131,10 @@ function Upload({handlePageChange ,setAllFile ,AllFile}) {
         </button>
       </div>
       {error && <p className="error-message">{error}</p>}
-      {uploadProgress > 0 && (
-        <div className="progress">
-          <div
-            className="progress-bar"
-            style={{ width: `${uploadProgress}%` }}
-          ></div>
-        </div>
-      )}
+      
+      <div>
+        {/* <button className="btn" onClick={() => {setIsRunning(true)}}>Run</button> */}
+      </div>
     </div>
   );
 }
