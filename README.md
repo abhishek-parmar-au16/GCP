@@ -4,4 +4,4 @@ cmd -
 
 git pull
 npm i 
-npm start
+npm startok
