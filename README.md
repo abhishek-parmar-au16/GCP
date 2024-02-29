@@ -1,7 +1,5 @@
-Google console instance
-
-cmd - 
+Vedio Player Assignment
 
 git pull
 npm i 
-npm startok
+npm start
