@@ -14,7 +14,6 @@ function VideoList({handlePageChange, setAllFile, AllFile }) {
 
   // Delete function
   const handleDelete = (itemId) => {
-    console.log("Delete item:", itemId);
     setAllFile(AllFile.filter((i) => i.id !== itemId.id));
     // Implement delete action here
   };
@@ -62,7 +61,7 @@ function VideoList({handlePageChange, setAllFile, AllFile }) {
         
         <video controls width="40%" height="40%" >
           <source
-            src={"blob:http://localhost:3000/1125b9bf-96ed-42d1-9af4-5d8d5e55041e"}
+            src={"blob:https://abhishek-parmar-au16.github.io/6d70e4fd-b3bb-4fec-a509-f1182af2c296"}
             type={"video/mp4"}
           />
           Your browser does not support the video tag.

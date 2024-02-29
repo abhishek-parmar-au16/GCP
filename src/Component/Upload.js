@@ -21,13 +21,11 @@ function Upload({ handlePageChange, setAllFile, AllFile }) {
   }, [filled, isRunning]);
 
   const handleFileUpload = (e) => {
-    console.log("ee", e);
     if (e.target.files[0].size > 200 * 1024 * 1024) {
       setError("File size exceeds the limit of 200MB");
       return;
     } else {
       setFile(e.target.files[0]);
-      console.log("URL ", URL.createObjectURL(e.target.files[0]));
       setIsRunning(true);
       //   URL.createObjectURL(event.target.files[0])
     }
@@ -47,9 +45,8 @@ function Upload({ handlePageChange, setAllFile, AllFile }) {
         File: file,
         id: uuidv4(),
       };
-      console.log(videoName, typeVdo, file);
+      
       setAllFile((oldArray) => [...oldArray, obj]);
-      console.log(AllFile);
       setVideoName("");
       setFile(null);
       settypeVdo("");
