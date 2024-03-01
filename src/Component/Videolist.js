@@ -1,15 +1,36 @@
 // VideoList.js
 
-import React, { useState } from "react";
-import Iframe from 'react-iframe'
+import React, { useState ,useRef ,useEffect} from "react";
 import "./Table.css";
+import firstVdo from "./Videos/13 - Views  Layouts Part A.mp4"
+import secondVdo from "./Videos/19 - Logout  Access Control Part A.mp4"
+import thirdVdo from "./Videos/intod.mp4"
+
+
+const VideoPlayer = ({ src }) => {
+  return (
+    <video controls width="40%" height="40%" autoplay>
+      <source src={src} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+};
+
 
 function VideoList({handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
-  const [VedioSource, setVedioSource] = useState("");
+  const [VedioSource, setVedioSource] = useState(thirdVdo);
+
+
   // Fetch and display video list from JSON here
   const handlePlay = (itemId) => {
-    console.log("Play item:", URL.createObjectURL(itemId?.File));
-    setVedioSource(url);
+    console.log("Play item:", itemId);
+    if(VedioSource ==true){
+
+      setVedioSource(false);
+    }else{
+
+      setVedioSource(true);
+    }
     // Implement play action here
   };
 
@@ -22,6 +43,7 @@ function VideoList({handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
   const handleChangeredirect =()=>{
     handlePageChange("upload")
   }
+  console.log("vedio" ,VedioSource);
   return (
     <div>
       <div>
@@ -58,23 +80,21 @@ function VideoList({handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
         </table>
         {/* Display video list */}
       </div>
-      <div className="vedio" >
-        
-        <video controls width="40%" height="40%" >
-          <source
-            src={VedioSource}
-            type={"video/mp4"}
-          />
-          Your browser does not support the video tag.
-        </video>
-        {/* <Iframe url="https://www.sdrive.app/embed/1ptBQD"
-        width="640px"
-        height="320px"
-        id=""
-        className=""
-        // display="block"
-        position="relative"/> */}
+      {VedioSource===true && (
+      <div className="vedio">
+        <VideoPlayer  src={firstVdo} />
       </div>
+      )}
+      {VedioSource=== false && (
+      <div className="vedio" >
+        <VideoPlayer src={secondVdo} />
+      </div>
+      )}
+      {VedioSource=== thirdVdo && (
+      <div className="vedio" >
+        <VideoPlayer src={thirdVdo} />
+      </div>
+      )}
       <div className="button-container">
         <button className="button" onClick={handleChangeredirect}>Upload New</button>
       </div>

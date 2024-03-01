@@ -1,0 +1,14 @@
+[
+    {
+      "name": "Video 1",
+      "path": "./Videos/01 - Introduction.mp4"
+    },
+    {
+      "name": "Video 2",
+      "path": "./Videos/13 - Views  Layouts Part A.mp4"
+    },
+    {
+      "name": "Video 3",
+      "path": "./Videos/19 - Logout  Access Control Part A.mp4"
+    }
+  ]

@@ -3,14 +3,7 @@
 import React, { useState, useEffect } from "react";
 import "./Upload.css";
 import { v4 as uuidv4 } from "uuid";
-import { CloudinaryUploadWidget } from 'cloudinary-react';
-import { config } from 'cloudinary'
-
-config({
-  cloud_name: 'dbqxbitfe',
-  api_key: '398565383923253',
-  api_secret: 'your_api_secret',
-});
+import videoData from "./video.json"
 
 function Upload({ handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
   const [videoName, setVideoName] = useState("");
@@ -19,8 +12,12 @@ function Upload({ handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
   const [typeVdo, settypeVdo] = useState("");
   const [filled, setFilled] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [videos, setVideos] = useState([]);
  
   useEffect(() => {
+    
+    setVideos(videoData);
+
     if (filled < 100 && isRunning) {
       setTimeout(() => setFilled((prev) => (prev += 2)), 40);
     }
@@ -33,9 +30,17 @@ function Upload({ handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
     } else {
       setFile(e.target.files[0]);
       setIsRunning(true);
-      console.log(URL.createObjectURL(e.target.files[0]));
-      setUrl(URL.createObjectURL(e.target.files[0]))
-        // URL.createObjectURL(event.target.files[0])
+      if(AllFile.length === 1){
+        setUrl(videos?.[0].path)
+      }
+      else if(AllFile.length === 2){
+        setUrl(videos?.[1].path)
+      }
+      else if(AllFile.length === 3){
+        setUrl(videos?.[2].path)
+      }else {
+        setUrl(videos?.[0].path)
+      } 
     }
   };
 
@@ -52,6 +57,7 @@ function Upload({ handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
         Type: typeVdo,
         File: file,
         id: uuidv4(),
+        url:url
       };
       
       setAllFile((oldArray) => [...oldArray, obj]);
