@@ -3,17 +3,23 @@
 import React, { useState, useEffect } from "react";
 import "./Upload.css";
 import { v4 as uuidv4 } from "uuid";
-import UploadList from "./Videolist";
+import { CloudinaryUploadWidget } from 'cloudinary-react';
+import { config } from 'cloudinary'
 
-function Upload({ handlePageChange, setAllFile, AllFile }) {
+config({
+  cloud_name: 'dbqxbitfe',
+  api_key: '398565383923253',
+  api_secret: 'your_api_secret',
+});
+
+function Upload({ handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
   const [videoName, setVideoName] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [typeVdo, settypeVdo] = useState("");
-  const [uploadProgress, setUploadProgress] = useState(0);
   const [filled, setFilled] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-
+ 
   useEffect(() => {
     if (filled < 100 && isRunning) {
       setTimeout(() => setFilled((prev) => (prev += 2)), 40);
@@ -27,11 +33,13 @@ function Upload({ handlePageChange, setAllFile, AllFile }) {
     } else {
       setFile(e.target.files[0]);
       setIsRunning(true);
-      //   URL.createObjectURL(event.target.files[0])
+      console.log(URL.createObjectURL(e.target.files[0]));
+      setUrl(URL.createObjectURL(e.target.files[0]))
+        // URL.createObjectURL(event.target.files[0])
     }
   };
 
-  const handleUpload = () => {
+  const HandleNext = () => {
     if (!videoName) {
       setError("Please enter a video name");
       return;
@@ -51,15 +59,14 @@ function Upload({ handlePageChange, setAllFile, AllFile }) {
       setFile(null);
       settypeVdo("");
       setFilled(0);
+      handlePageChange("list");
     }
   };
 
-  const HandleNext = () => {
-    handlePageChange("list");
-  };
-  const handleBack = () => {
-    handlePageChange("login");
-  };
+
+  // const handleBack = () => {
+  //   handlePageChange("login");
+  // };
   return (
     <div className="upload-container">
       <h2>Upload Video</h2>
@@ -111,20 +118,20 @@ function Upload({ handlePageChange, setAllFile, AllFile }) {
             <span className="progressPercent">{filled}%</span>
           </div>
         )}
-        <button type="button" onClick={handleUpload}>
+        {/* <button type="button" onClick={handleUpload}>
           Upload
-        </button>
+        </button> */}
       </form>
       <div style={{ display: "flex", marginTop: "13px" }}>
-        <button
+        {/* <button
           type="button"
           onClick={handleBack}
           style={{ marginRight: "5px" }}
         >
           Back
-        </button>
+        </button> */}
         <button type="button" onClick={HandleNext}>
-          Next
+          Submit
         </button>
       </div>
       {error && <p className="error-message">{error}</p>}

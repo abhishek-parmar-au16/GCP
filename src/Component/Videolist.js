@@ -1,14 +1,15 @@
 // VideoList.js
 
 import React, { useState } from "react";
+import Iframe from 'react-iframe'
 import "./Table.css";
 
-function VideoList({handlePageChange, setAllFile, AllFile }) {
+function VideoList({handlePageChange, setAllFile, AllFile ,url ,setUrl }) {
   const [VedioSource, setVedioSource] = useState("");
   // Fetch and display video list from JSON here
   const handlePlay = (itemId) => {
     console.log("Play item:", URL.createObjectURL(itemId?.File));
-    setVedioSource(URL.createObjectURL(itemId?.File));
+    setVedioSource(url);
     // Implement play action here
   };
 
@@ -61,11 +62,18 @@ function VideoList({handlePageChange, setAllFile, AllFile }) {
         
         <video controls width="40%" height="40%" >
           <source
-            src={"blob:https://abhishek-parmar-au16.github.io/6d70e4fd-b3bb-4fec-a509-f1182af2c296"}
+            src={VedioSource}
             type={"video/mp4"}
           />
           Your browser does not support the video tag.
         </video>
+        {/* <Iframe url="https://www.sdrive.app/embed/1ptBQD"
+        width="640px"
+        height="320px"
+        id=""
+        className=""
+        // display="block"
+        position="relative"/> */}
       </div>
       <div className="button-container">
         <button className="button" onClick={handleChangeredirect}>Upload New</button>
